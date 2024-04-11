@@ -31,7 +31,11 @@ public class User {
 	private String email;
 	@Column(name = "AREA_OF_INTEREST")
 	private String areaOfInterest;
+	@Column(name = "PASSWORD")
+	private String password;
 	
+
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 	private List<OrderHistory> orderHistoryList;
@@ -103,6 +107,14 @@ public class User {
 
 	public void setWishList(List<WishList> wishList) {
 		this.wishList = wishList;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

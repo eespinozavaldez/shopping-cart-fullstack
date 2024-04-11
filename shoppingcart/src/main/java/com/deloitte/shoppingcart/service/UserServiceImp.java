@@ -2,10 +2,12 @@ package com.deloitte.shoppingcart.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.deloitte.shoppingcart.exception.UserAlreadyExistsException;
 import com.deloitte.shoppingcart.exception.UserNotFoundException;
 import com.deloitte.shoppingcart.model.User;
 import com.deloitte.shoppingcart.repository.UserRepository;
@@ -32,21 +34,23 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public String newUser(User user) {
-		User existingUser = userRepository.findByEmail(user.getEmail());
+	public Optional<User> newUser(User user) {
+		 User existingUser = userRepository.findByEmail(user.getEmail());
+		 
 
         if (existingUser != null) {
-            return "User already exists";
+        	 throw new UserAlreadyExistsException("Username already exists!");
         } else {
             userRepository.save(user);
-            return "New User created";
+           return Optional.of(user);
         }
+	
 	}
 
 	@Override
 	public User updateUser(int userId, User user) {
 		User updateUser = userRepository.findById(userId).orElse(null);
-		updateUser.setEmail(user.getEmail());
+		updateUser.setBio(user.getBio());
 		updateUser.setAreaOfInterest(user.getAreaOfInterest());
 
 		return userRepository.save(updateUser);
@@ -69,6 +73,17 @@ public class UserServiceImp implements UserService{
 		userRepository.deleteById(userId);
 
 		
+	}
+
+	@Override
+	public User loginUser(User user) {
+	 User findUser = userRepository.findByEmail(user.getEmail());
+	 System.out.println(findUser.getPassword());
+	if (findUser.getPassword().equals(user.getPassword())) {
+		
+		return findUser;
+	}
+	return null;
 	}
 	
 	

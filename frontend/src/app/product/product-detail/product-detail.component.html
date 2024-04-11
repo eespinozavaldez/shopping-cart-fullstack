@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-center"  *ngIf="product">
+    <div class="card" style="width:18rem" >
+        <img class="card-img-top" src="#" alt="">
+        <div class="card-body text-center">
+          <h4 class="card-title fw-bold"> {{ product.name }}</h4>
+          <img class="card-img-top" src={{product.image}}>
+            <ul class="list-group ">
+                <li class="list-group-item">Price: {{ product.price | currency  }}</li>
+                <li class="list-group-item">{{ product.description }}</li>
+                <li class="list-group-item">Inventory: {{ product.totalProductsInventory }}</li>
+              </ul>
+        </div>
+      </div>
+</div>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.deloitte.shoppingcart.model.User;
 import com.deloitte.shoppingcart.service.UserService;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/users")
 public class UserController {
 
@@ -38,10 +40,14 @@ public class UserController {
 	
 	// create a new user, validate with email.
 	   @PostMapping("/add")
-	    public String newUser(@RequestBody User user) {
+	    public Optional<User> newUser(@RequestBody User user) {
 	        return userService.newUser(user);
 	    }
 
+	   @PostMapping("/login")
+	    public User loginUser(@RequestBody User user) {
+	        return userService.loginUser(user);
+	    }
 	//update user, only email and area of interest.
 	@PutMapping("/{userId}")
 	public User updateUser(@PathVariable int userId, @RequestBody User user) {

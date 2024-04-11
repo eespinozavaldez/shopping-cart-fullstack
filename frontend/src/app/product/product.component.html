@@ -1,0 +1,41 @@
+
+
+
+<div class="container-fluid">
+  
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="spinner-container d-flex align-items-center justify-content-center" *ngIf="loading">
+      
+        <mat-spinner></mat-spinner>
+      
+      </div>
+      <form class="d-flex m-5">
+        <input class="form-control"  placeholder="Search"(keyup)="applyFilter($event)" placeholder="Search product by name, price" #input>
+      </form>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-4"  *ngFor="let product of obs | async, let i = index">
+      <div class="card align-items-center">
+          <img class="card-img-top" src="{{ product.image }}" (click)="openDialog(product)">
+          <div class="card-body text-center">
+            <h4 class="card-title fw-bold ">{{ product.name}}</h4>
+            <p class="card-text"> Price: {{ product.price | currency  }}</p>
+            <div>
+              <button class="btn text-white" (click)="addToCart(product)">Add to Cart</button>
+              <a class="btn-wish" (click)="addToWishList(product)"> <i class="material-icons">favorite</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-paginator [pageSize]="3" [pageSizeOptions]="[3, 6, 9,12,16]"></mat-paginator>
+</div>
+
+
+
+ 

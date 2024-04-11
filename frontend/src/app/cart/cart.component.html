@@ -1,0 +1,73 @@
+<ng-container *ngIf="cart.length != 0">
+  
+  <div class="cart-container d-flex align-items-center justify-content-center">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <div class="spinner-container d-flex align-items-center justify-content-center" *ngIf="loading">
+
+        <mat-spinner></mat-spinner>
+      
+      </div>
+      <tbody>
+        <tr *ngFor="let item of cart, let i = index">
+          <td><img src="{{ item.image }}" alt="{{ item.name}}"></td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.price | currency }}</td>
+          <td>
+            <input type="text" value="{{ item.quantity }}" style="width: 50px;">
+          </td>
+          <td>
+            <button type="button" class="btn-close" aria-label="Close"
+              (click)="deleteFromCart(item.productId)"></button>
+          </td>
+        </tr>
+      </tbody>
+      <br>
+      <tfoot>
+        <!-- <td><button class="btn btn-primary text-white" (click)="createOrder()"> Checkout</button></td> -->
+        <td colspan="2"><button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">Checkout</button></td>
+        <td colspan="5" class="text-end"><strong>Total: $ {{ total }}</strong></td>
+      </tfoot>
+    </table>
+  </div>
+</ng-container>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Checkout Process</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are yor sure you want to continue with the purchase?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" (click)="orderConfirme()" data-bs-dismiss="modal">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="cart.length == 0">
+  <div class="d-flex align-items-center justify-content-center">
+    <div class="empty-cart position-relative">
+      <h1>Your cart is empty!</h1>
+      <h1>Add item to it now</h1>
+      <button routerLink="/products" class="btn text-white">Shop Now</button>
+    </div>
+  </div>
+</ng-container>

@@ -29,6 +29,14 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	    return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
 	  }
 	
+	@ExceptionHandler(UserAlreadyExistsException.class)
+    public final ResponseEntity<ErrorDetails> handleUserAlreadyExistsException(Exception ex, WebRequest request) {
+	    ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(),
+		        request.getDescription(false));
+	    return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+	}
+        
+        
 	@ExceptionHandler(ProductNotFoundException.class)
 	  public final ResponseEntity<ErrorDetails> handleProductNotFoundException(Exception ex, WebRequest request) {
 	    ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(),
@@ -43,4 +51,10 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	    return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
 	  }
 	
+	@ExceptionHandler(OrderRunOffInventoryException.class)
+	  public final ResponseEntity<ErrorDetails> handleOrderRunOffInventoryException(Exception ex, WebRequest request) {
+	    ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(),
+	        request.getDescription(false));
+	    return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+	  }
 }

@@ -51,8 +51,8 @@ public class WishListServiceImp implements WishListService {
 	}
 
 	@Override
-	public void deleteProductWishlist(int userId, int productId) {
-		wishListRepository.deleteProductWishlist(userId, productId);
+	public void deleteProductWishlist(int productId) {
+		wishListRepository.deleteProductWishlist(productId);
 
 	}
 

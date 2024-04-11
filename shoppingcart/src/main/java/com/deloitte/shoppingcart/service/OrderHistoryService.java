@@ -13,7 +13,7 @@ public interface OrderHistoryService {
 	
 	public List<OrderHistory> getOrderHstoryByUser( int userId);
 	
-	public String addProductOrderHistory(OrderHistory order);
+	public Optional<OrderHistory> addProductOrderHistory(OrderHistory order);
 	
 	public void deleteOrderByUser(int userId);
 }

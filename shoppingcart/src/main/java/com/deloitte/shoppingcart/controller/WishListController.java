@@ -10,6 +10,7 @@ import com.deloitte.shoppingcart.service.WishListService;
 
 import jakarta.transaction.Transactional;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/wishlist")
 public class WishListController {
 
@@ -50,11 +52,11 @@ public class WishListController {
 
 	}
 
-//	 Delete a product from wish list by a specific user
+//	 Delete a product from wish list 
 	@Transactional
-	@DeleteMapping("/users/{userId}/removeproduct/{productId}")
-	public void deleteProductWishlist(@PathVariable int userId, @PathVariable int productId) {
-		 wishListService.deleteProductWishlist(userId, productId);
+	@DeleteMapping("removeproduct/{productId}")
+	public void deleteProductWishlist(@PathVariable int productId) {
+		 wishListService.deleteProductWishlist(productId);
 	}
 
 	// Delete whole wish list from a user

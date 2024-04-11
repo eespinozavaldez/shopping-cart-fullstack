@@ -1,0 +1,36 @@
+.card {
+    width: 300px;
+    padding: 20px;
+    margin: 30px;
+}
+
+.card img {
+    width: 180px;
+    height: 200px;
+    margin-bottom: 15px;
+
+}
+
+.btn {
+    background-color: #6e95cc;
+}
+
+.btn-src {
+    border-radius: 5px;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+}
+
+.spinner-container {
+    height: 360px;
+    width: 390px;
+    position: fixed;
+}
+
+.btn-wish {
+    cursor: pointer;
+
+}

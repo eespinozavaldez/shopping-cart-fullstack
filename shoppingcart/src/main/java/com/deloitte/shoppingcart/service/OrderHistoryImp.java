@@ -7,17 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.deloitte.shoppingcart.exception.OrderNotFoundException;
+import com.deloitte.shoppingcart.exception.OrderRunOffInventoryException;
 import com.deloitte.shoppingcart.model.OrderHistory;
 import com.deloitte.shoppingcart.model.Product;
+import com.deloitte.shoppingcart.model.User;
 import com.deloitte.shoppingcart.repository.OrderHistoryRepository;
 import com.deloitte.shoppingcart.repository.ProductRepository;
+import com.deloitte.shoppingcart.repository.UserRepository;
 
 @Service
 public class OrderHistoryImp implements OrderHistoryService{
 	
 	@Autowired
 	private OrderHistoryRepository orderRepository;
-
+	@Autowired
+	private UserRepository userRepository;
 	@Autowired
 	private ProductRepository productRepository;
 
@@ -42,23 +46,28 @@ public class OrderHistoryImp implements OrderHistoryService{
 	}
 
 	@Override
-	public String addProductOrderHistory(OrderHistory order) {
-	int productId = order.getProduct().getProductId();
+	public Optional<OrderHistory> addProductOrderHistory(OrderHistory order) {
+		int userId = order.getUser().getUserId();
+		User user = userRepository.findById(userId).get();
+		order.setUser(user);
 		
+		int productId = order.getProduct().getProductId();
 		Product product = productRepository.findById(productId).get();
+		order.setProduct(product);
 		
-		boolean orderProductHistory = product.getTotalProductsInventory() > 0 ;
+		boolean orderProductHistory = product.getTotalProductsInventory() == 0 ;
 		
 		if(orderProductHistory) {
-			product.setTotalProductsInventory(product.getTotalProductsInventory() -1);
-			orderRepository.save(order);
-			return "Product: " + product.getName() + " added successfully!";
+			throw new OrderRunOffInventoryException("There is no more inventory for the product: " + product.getName());
 			
 		}else {
-			
+			product.setTotalProductsInventory(product.getTotalProductsInventory() -1);
 			orderRepository.save(order);
-			return "There is no more inventory for the product: " + product.getName();
+			
+		    return Optional.of(order);
 		}
+		
+		
 	}
 
 	@Override

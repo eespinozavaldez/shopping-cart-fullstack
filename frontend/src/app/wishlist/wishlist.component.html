@@ -1,0 +1,44 @@
+
+
+
+<div class="wish-container d-flex align-items-center justify-content-center ">
+ <div>
+  <h1 class="text-center m-3">My WishList</h1>
+ </div>
+ <div class="spinner-container d-flex align-items-center justify-content-center" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+  <table class="table table-hover">
+    <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Delete</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        <tr *ngFor="let item of wishList, let i = index">
+          <td><img src="{{ item.product.image}}" alt="{{ item.product.name}}"></td>
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.product.price  | currency }}</td>
+          <td>
+            <button  class="btn-close" aria-label="Close"
+              (click)="deleteFromWishList(item.product.productId)"></button>
+              
+          </td>
+          <td><button class="btn-cart text-white" (click)="sendToCart(item.product)" >
+            Add to cart
+          </button></td>
+        </tr>
+      </tbody>
+      <br>
+      <tfoot>
+
+        <td colspan="5" class="text-end">
+          </td>
+      </tfoot>
+  </table>
+  </div>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import com.deloitte.shoppingcart.service.OrderHistoryService;
 import jakarta.transaction.Transactional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/orderhistory")
 public class OrderHistoryController {
 
@@ -44,7 +46,7 @@ public class OrderHistoryController {
 
 	// create a new order and add products.
 	@PostMapping("/addproduct")
-	public String addProductOrderHistory(@RequestBody OrderHistory order) {
+	public Optional<OrderHistory> addProductOrderHistory(@RequestBody OrderHistory order) {
 
 		return orderService.addProductOrderHistory(order);
 

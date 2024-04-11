@@ -15,7 +15,7 @@ public interface WishListService {
 
 	public WishList addWishList(WishList wishList);
 
-	public void deleteProductWishlist(int userId, int productId);
+	public void deleteProductWishlist(int productId);
 
 	public void deleteWishlistByUser(int userId);
 

@@ -1,0 +1,24 @@
+table {
+    margin:30px;
+    width: 500px;
+}
+
+
+.btn {
+    background-color: #6e95cc;
+}
+
+.btn-qty {
+   border: none;
+   border-radius: 5px;
+}
+
+img {
+width: 50px;
+}
+
+.spinner-container {
+    height: 360px;
+    width: 390px;
+    position: fixed;
+}

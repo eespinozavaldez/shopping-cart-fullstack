@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Product {
 	private double price;
 	@Lob
 	@Column(name = "IMAGE")
-	private byte[] image;
+	private String image;
 	@Column(name = "DESCRIPTION")
 	private String description;
 	@Column(name = "TOTAL_PRODUCTS_INVENTORY")
@@ -38,10 +39,10 @@ public class Product {
 	private boolean status;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<OrderHistory> orderHistoryList;
 	@JsonIgnore
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<WishList> wishLists;
 
 
@@ -69,11 +70,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

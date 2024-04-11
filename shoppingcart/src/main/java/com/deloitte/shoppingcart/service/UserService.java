@@ -12,7 +12,7 @@ public interface UserService {
 	
 	public Optional<User> getUserById(int userId);
 	
-	public String newUser(User user);
+	public Optional<User> newUser(User user);
 	
 	public User updateUser(int userId,  User user);
 	
@@ -21,6 +21,8 @@ public interface UserService {
 	public User findUserByEmail(String email);
 	
 	public void deleteUser(int userId);
+
+	public User loginUser(User user);
 	
 
 }
