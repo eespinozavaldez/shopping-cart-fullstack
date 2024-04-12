@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,11 @@ import { Product } from '../models/product.model';
 export class CartService {
 
   cart: any = [];
-  // cartItems: number = 1;
+  
+  private itemCountSubject = new BehaviorSubject<number>(0);
+  itemCount$ = this.itemCountSubject.asObservable();
+
+
   itemExists: boolean = false;
   itemCart: any;
 
@@ -39,7 +44,10 @@ export class CartService {
      this.setlocalStorage();
     }
 
-    console.log(this.cart);
+    this.itemCountSubject.next(this.itemCountSubject.value + 1);
+    console.log(this.itemCount$);
+
+  
   }
 
   deleteFromCart(productId: number) {

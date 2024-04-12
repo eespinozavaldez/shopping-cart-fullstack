@@ -15,12 +15,10 @@ export class SignupComponent implements OnInit {
   hide = true;
   newUser: any;
   form: FormGroup;
-  // edit: boolean = false
 
   constructor(private fb: FormBuilder , 
             private userService: UserService, 
             private router: Router) {
-    // console.log(this.edit);
    
   }
 
@@ -36,13 +34,11 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
-    // this.edit = true;
     console.log(this.form.value);
     this.userService.signup(this.form.value)
       .subscribe((res) => {
        this.newUser = res;
 
-      //  localStorage.setItem("user", JSON.stringify(res)); 
 
       console.log("New User created");
 
@@ -53,14 +49,5 @@ export class SignupComponent implements OnInit {
       });
   }
 
-  // update() {
-  //   this.edit = !this.edit;
-  //   console.log(this.newUser.userId);
-  //   event?.preventDefault();
-  //   this.router.navigate(['/update-user', this.newUser.userId]);
-  // }
 
-  // cancelEdit() {
-  //   this.edit = false;
-  // }
 }

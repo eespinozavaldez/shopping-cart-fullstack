@@ -8,7 +8,7 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
   private API_URL = "http://localhost:8080/shoppingcart/users/";
-
+  
   private subject = new BehaviorSubject<User>(null);
 
   user$ : Observable<User> = this.subject.asObservable();

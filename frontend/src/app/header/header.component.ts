@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
 
   products:  Product[];
   cart : any;
-  cartItems: number = 0;
+  itemCount: number = 0;
 
 
   user: User;
@@ -30,14 +30,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
  
-    this.cart = this.cartService.getCart();
-    
-     if (this.cart) {
-      this.cart.forEach((product: { quantity: number; }) => {
-        return this.cartItems += product.quantity;
-      });
-     }
+    this.cartService.itemCount$
+    .subscribe(count =>{
+      this.itemCount = count;
+    });
 
+  
+    this.auth.user$.subscribe(res =>
+      this.user = res
+    );
   }
 
 logout() {

@@ -6,11 +6,12 @@
                placeholder="Email"
                formControlName="email" required>
       </mat-form-field>
-      <mat-form-field>
-        <input matInput type="text"
-               placeholder="password"
-               formControlName="password" required>
-      </mat-form-field>
+      <mat-form-field apperance="outline">
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="password" formControlName="password" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+    </mat-form-field>
  
       <div class="button-login">
       <button mat-raised-button color="primary" (click)="login()">
@@ -21,16 +22,6 @@
       </button>
     </div>
     </form>
-
-  
-  <!-- regresar el valor del formulario -->
-  <div class="form-val">
-    {{ form.value |json }}
-  </div>
-
-  <div class="form-val">
-    {{ form.valid }}
-  </div>
 
   </mat-card-content>
 </mat-card>

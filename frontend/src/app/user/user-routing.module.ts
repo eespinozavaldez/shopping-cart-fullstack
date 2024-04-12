@@ -4,6 +4,7 @@ import { LoginComponent } from "./login/login.component";
 import { OrderComponent } from "./order/order.component";
 import { EditComponent } from "./edit/edit.component";
 import { AuthGuard } from "./auth.guard";
+import { SignupComponent } from "./signup/signup.component";
 
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
     },
     {
         path: 'signup',
-        component: LoginComponent
+        component: SignupComponent
     },
     {
         path: 'orders',
@@ -41,8 +42,7 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     providers: [
-        //   CourseResolver,
-        //   AuthGuard
+          AuthGuard
     ]
 })
 export class UserRoutingModule {

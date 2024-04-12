@@ -4,7 +4,6 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductComponent } from './product.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { ProductService } from './product.service';
-import { SearchPipe } from '../pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
@@ -20,8 +19,7 @@ import { ProductRoutingModule } from './product-routing.module';
 @NgModule({
   declarations: [  
     ProductComponent,
-    ProductDetailComponent,
-    // SearchPipe
+    ProductDetailComponent
   ],
   imports: [
     CommonModule,
